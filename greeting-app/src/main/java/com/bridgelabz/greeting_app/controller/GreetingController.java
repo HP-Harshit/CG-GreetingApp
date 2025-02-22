@@ -19,9 +19,18 @@ public class GreetingController {
     }
 
     @GetMapping
-    public Map<String, String> getGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    public Map<String, String> getGreeting() {
         Map<String, String> response = new HashMap<>();
-        response.put("message", "Hello, " + name + "!");
+        response.put("message", greetingService.getGreetingMessage());
+        return response;
+    }
+
+    @GetMapping("/personalized")
+    public Map<String, String> getPersonalizedGreeting(
+            @RequestParam(value = "firstName", required = false) String firstName,
+            @RequestParam(value = "lastName", required = false) String lastName) {
+        Map<String, String> response = new HashMap<>();
+        response.put("message", greetingService.getGreetingMessage(firstName, lastName));
         return response;
     }
 
