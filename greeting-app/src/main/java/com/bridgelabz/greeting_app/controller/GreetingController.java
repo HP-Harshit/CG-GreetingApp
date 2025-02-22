@@ -60,10 +60,11 @@ public class GreetingController {
         return greetingService.updateGreeting(id, message);
     }
 
-    @DeleteMapping
-    public Map<String, String> deleteGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+    @DeleteMapping("/{id}")
+    public Map<String, String> deleteGreeting(@PathVariable Long id) {
+        greetingService.deleteGreeting(id);
         Map<String, String> response = new HashMap<>();
-        response.put("message", "Greeting deleted for " + name + "!");
+        response.put("message", "Greeting deleted with ID: " + id);
         return response;
     }
 }

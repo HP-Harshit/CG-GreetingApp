@@ -62,4 +62,9 @@ public class GreetingServiceImpl implements GreetingService {
         }
         return Optional.empty();
     }
+
+    @Override
+    public void deleteGreeting(Long id) {
+        greetingRepository.deleteById(id);
+    }
 }
