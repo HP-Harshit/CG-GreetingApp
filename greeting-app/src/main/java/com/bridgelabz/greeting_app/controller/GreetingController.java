@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,6 +46,11 @@ public class GreetingController {
     @GetMapping("/{id}")
     public Optional<Greeting> findGreetingById(@PathVariable Long id) {
         return greetingService.findGreetingById(id);
+    }
+
+    @GetMapping("/all")
+    public List<Greeting> findAllGreetings() {
+        return greetingService.findAllGreetings();
     }
 
     @PutMapping
