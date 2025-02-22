@@ -53,11 +53,11 @@ public class GreetingController {
         return greetingService.findAllGreetings();
     }
 
-    @PutMapping
-    public Map<String, String> updateGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Greeting updated for " + name + "!");
-        return response;
+    @PutMapping("/{id}")
+    public Optional<Greeting> updateGreeting(
+            @PathVariable Long id,
+            @RequestParam(value = "message") String message) {
+        return greetingService.updateGreeting(id, message);
     }
 
     @DeleteMapping

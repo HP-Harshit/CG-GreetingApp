@@ -51,4 +51,15 @@ public class GreetingServiceImpl implements GreetingService {
     public List<Greeting> findAllGreetings() {
         return greetingRepository.findAll();
     }
+
+    @Override
+    public Optional<Greeting> updateGreeting(Long id, String message) {
+        Optional<Greeting> existingGreeting = greetingRepository.findById(id);
+        if (existingGreeting.isPresent()) {
+            Greeting greeting = existingGreeting.get();
+            greeting.setMessage(message);
+            return Optional.of(greetingRepository.save(greeting));
+        }
+        return Optional.empty();
+    }
 }
