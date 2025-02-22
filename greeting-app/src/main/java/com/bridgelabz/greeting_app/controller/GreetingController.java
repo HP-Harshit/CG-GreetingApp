@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/greeting")
@@ -39,6 +40,11 @@ public class GreetingController {
     public Greeting createGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
         String message = "Hello, " + name + "!";
         return greetingService.saveGreeting(message);
+    }
+
+    @GetMapping("/{id}")
+    public Optional<Greeting> findGreetingById(@PathVariable Long id) {
+        return greetingService.findGreetingById(id);
     }
 
     @PutMapping
