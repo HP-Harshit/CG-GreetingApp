@@ -1,5 +1,6 @@
 package com.bridgelabz.greeting_app.controller;
 
+import com.bridgelabz.greeting_app.model.Greeting;
 import com.bridgelabz.greeting_app.service.GreetingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -35,10 +36,9 @@ public class GreetingController {
     }
 
     @PostMapping
-    public Map<String, String> createGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Greeting created for " + name + "!");
-        return response;
+    public Greeting createGreeting(@RequestParam(value = "name", defaultValue = "World") String name) {
+        String message = "Hello, " + name + "!";
+        return greetingService.saveGreeting(message);
     }
 
     @PutMapping
